@@ -1,211 +1,52 @@
-# exercício do jogo da velha
-from lib import numero, printcores
+import numero as nu
+import printcores as prt
 
+#Aqui eu crio a tabela base do jogo.
+tabela = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-def tabela():
-    print(f'{pos[0][0]:^3}\033[34m|\033[m{pos[0][1]:^3}\033[34m|\033[m{pos[0][2]:^3}')
-    printcores.azul(f'{"-" * 3}+{"-" * 3}+{"-" * 3}')
-    print(f'{pos[1][0]:^3}\033[34m|\033[m{pos[1][1]:^3}\033[34m|\033[m{pos[1][2]:^3}')
-    printcores.azul(f'{"-" * 3}+{"-" * 3}+{"-" * 3}')
-    print(f'{pos[2][0]:^3}\033[34m|\033[m{pos[2][1]:^3}\033[34m|\033[m{pos[2][2]:^3}')
+#Aqui eu crio a lista que vai receber os números jogados
+preenchidos = []
 
-
-cont = 0
-pos = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
-
+#Aqui eu crio o loop principal
 while True:
-    tabela()
 
+    #Aqui eu crio o loop do primeiro jogador.
     while True:
-        jogador1 = numero.digiteint('\033[35mJOGADOR 1 = Em qual posição você quer jogar? \033[m')
-        if 0 < jogador1 > 9:
-            printcores.vermelho('Opção inválida! Digite um número de 1 a 9.')
+        #jogador O
+
+        #Aqui eu crio a tabela principal.
+        print(
+            f'|{tabela[0]} | {tabela[1]} | {tabela[2]} |\n'
+            f'|{tabela[3]} | {tabela[4]} | {tabela[5]} |\n'
+            f'|{tabela[6]} | {tabela[7]} | {tabela[8]} |'
+        )
+
+        """Aqui eu crio um bloco try-except para garantir que o usuário não 
+        digite nada além de números de 1 a 9"""
+        try:
+
+            #Aqui o Python pergunta ao usuário o número em que ele vai jogar.
+            num = int(input('Qual casa você vai preencher?'))
+
+            #Aqui eu verifico se o número já foi jogado.
+            if num in preenchidos:
+                print('Essa casa já está ocupada! Escolha outra')
+                continue
+
+            #Aqui eu verifico se o número ainda não foi jogado e
+            #já atribuo o "O" azul e quebro o while.
+            elif num not in preenchidos:
+                tabela[num - 1] == prt.azul("O")
+                preenchidos.append(num)
+                break
+
+        #Aqui eu crio um except para caso o usuário digite algo além de números    
+        except ValueError:
+            print('Você precisa digitar um número inteiro\n')
             continue
-        if jogador1 == 1:
-            if pos[0][0] == ' \033[32mX\033[m ' or pos[0][0] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[0][0] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 2:
-            if pos[0][1] == ' \033[32mX\033[m ' or pos[0][1] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[0][1] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 3:
-            if pos[0][2] == ' \033[32mX\033[m ' or pos[0][2] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[0][2] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 4:
-            if pos[1][0] == ' \033[32mX\033[m ' or pos[1][0] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[1][0] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 5:
-            if pos[1][1] == ' \033[32mX\033[m ' or pos[1][1] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[1][1] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 6:
-            if pos[1][2] == ' \033[32mX\033[m ' or pos[1][2] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[1][2] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 7:
-            if pos[2][0] == ' \033[32mX\033[m ' or pos[2][0] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[2][0] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 8:
-            if pos[2][1] == ' \033[32mX\033[m ' or pos[2][1] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[2][1] = ' \033[35mO\033[m '
-            break
-        elif jogador1 == 9:
-            if pos[2][2] == ' \033[32mX\033[m ' or pos[2][2] == ' \033[35mO\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[2][2] = ' \033[35mO\033[m '
-            break
 
-    if pos[0][0] == ' \033[35mO\033[m ' and pos[0][1] == ' \033[35mO\033[m ' and pos[0][2] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    elif pos[1][0] == ' \033[35mO\033[m ' and pos[1][1] == ' \033[35mO\033[m ' and pos[1][2] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    elif pos[2][0] == ' \033[35mO\033[m ' and pos[2][1] == ' \033[35mO\033[m ' and pos[2][2] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    elif pos[0][0] == ' \033[35mO\033[m ' and pos[1][0] == ' \033[35mO\033[m ' and pos[2][0] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    elif pos[0][1] == ' \033[35mO\033[m ' and pos[1][1] == ' \033[35mO\033[m ' and pos[2][1] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    elif pos[0][2] == ' \033[35mO\033[m ' and pos[1][2] == ' \033[35mO\033[m ' and pos[2][2] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    elif pos[0][0] == ' \033[35mO\033[m ' and pos[1][1] == ' \033[35mO\033[m ' and pos[2][2] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    elif pos[2][0] == ' \033[35mO\033[m ' and pos[1][1] == ' \033[35mO\033[m ' and pos[0][2] == ' \033[35mO\033[m ':
-        printcores.roxo('jogador 1 venceu!')
-        tabela()
-        break
-    cont += 1
-    if cont >= 9:
-        tabela()
-        printcores.verde('Tivemos um empate!!!')
-        break
-
-    tabela()
-
-    while True:
-        jogador2 = numero.digiteint('\033[32mJOGADOR 2 = Em qual posição você quer jogar?\033[m ')
-        if 0 < jogador2 > 9:
-            printcores.vermelho('Opção inválida! Digite um número de 1 a 9.')
+        #Aqui eu crio um except para caso o usuário digite algo que não seja de
+        #1 a 9.
+        except IndexError:
+            print('Você tem que digitar um número de 1 a 9')
             continue
-        if jogador2 == 1:
-            if pos[0][0] == ' \033[35mO\033[m ' or pos[0][0] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[0][0] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 2:
-            if pos[0][1] == ' \033[35mO\033[m ' or pos[0][1] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[0][1] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 3:
-            if pos[0][2] == ' \033[35mO\033[m ' or pos[0][2] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[0][2] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 4:
-            if pos[1][0] == ' \033[35mO\033[m ' or pos[1][0] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[1][0] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 5:
-            if pos[1][1] == ' \033[35mO\033[m ' or pos[1][1] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[1][1] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 6:
-            if pos[1][2] == ' \033[35mO\033[m ' or pos[1][2] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[1][2] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 7:
-            if pos[2][0] == ' \033[35mO\033[m ' or pos[2][0] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[2][0] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 8:
-            if pos[2][1] == ' \033[35mO\033[m ' or pos[2][1] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[2][1] = ' \033[32mX\033[m '
-            break
-        elif jogador2 == 9:
-            if pos[2][2] == ' \033[35mO\033[m ' or pos[2][2] == ' \033[32mX\033[m ':
-                printcores.vermelho('Esta casa já está ocupada, escolha outra!')
-                continue
-            pos[2][2] = ' \033[32mX\033[m '
-            break
-
-    if pos[0][0] == ' \033[32mX\033[m ' and pos[0][1] == ' \033[32mX\033[m ' and pos[0][2] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    elif pos[1][0] == ' \033[32mX\033[m ' and pos[1][1] == ' \033[32mX\033[m ' and pos[1][2] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    elif pos[2][0] == ' \033[32mX\033[m ' and pos[2][1] == ' \033[32mX\033[m ' and pos[2][2] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    elif pos[0][0] == ' \033[32mX\033[m ' and pos[1][0] == ' \033[32mX\033[m ' and pos[2][0] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    elif pos[0][1] == ' \033[32mX\033[m ' and pos[1][1] == ' \033[32mX\033[m ' and pos[2][1] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    elif pos[0][2] == ' \033[32mX\033[m ' and pos[1][2] == ' \033[32mX\033[m ' and pos[2][2] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    elif pos[0][0] == ' \033[32mX\033[m ' and pos[1][1] == ' \033[32mX\033[m ' and pos[2][2] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    elif pos[2][0] == ' \033[32mX\033[m ' and pos[1][1] == ' \033[32mX\033[m ' and pos[0][2] == ' \033[32mX\033[m ':
-        print('jogador 2 venceu!')
-        tabela()
-        break
-    cont += 1
