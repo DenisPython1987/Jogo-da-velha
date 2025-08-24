@@ -1,4 +1,3 @@
-import numero as nu
 import printcores as prt
 import ver_vitoria
 
