@@ -1,4 +1,4 @@
-#Jogo da velha (tic-tac toe)
+# Jogo da velha (tic-tac toe)
 
 Esse jogo faz parte da lista de exercícios do curso de Python do grande professor
 Gustavo Guanabara.
