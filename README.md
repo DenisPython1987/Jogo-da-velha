@@ -9,4 +9,4 @@ Agora ele detecta a vitória corretamente.
 3. As regras para vencer neste jogo valem as mesmas do jogo tradicional, quem fizer uma linha reta com três casas primeiro, ganha
 
 [!IMPORTANT]
--> Esse jogo só roda no terminal do Python.
+Esse jogo só roda no terminal do Python.
